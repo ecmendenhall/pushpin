@@ -4,7 +4,7 @@ Pushpin::Application.routes.draw do
   match '/signup', to: 'users#new', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
 
-  get "users/new"
+  resources :users
 
 
   # The priority is based upon order of creation: first created -> highest priority.
