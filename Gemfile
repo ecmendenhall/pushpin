@@ -3,10 +3,16 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.beta1'
 gem 'bootstrap-sass', '2.3.0.1'
+gem 'bcrypt-ruby', '3.0.1'
 
 group :development, :test do
     gem 'sqlite3', '1.3.7'
     gem 'rspec-rails', '2.13.0'
+    gem 'guard-rspec', '2.5.0'
+    gem 'rb-fsevent', '0.9.3', :require => false
+    gem 'growl', '1.0.3'
+    gem 'spork-rails', github: 'railstutorial/spork-rails', branch: 'rails-4'
+    gem 'guard-spork', '1.5.0'
 end
 
 group :test do
