@@ -1,10 +1,17 @@
 Pushpin::Application.routes.draw do
   root to: 'static_pages#home'
 
-  match '/signup', to: 'users#new', via: 'get'
+  # Static pages 
   match '/about', to: 'static_pages#about', via: 'get'
 
+  # Authentication
+  match '/signup',  to: 'users#new',        via: 'get'
+  match '/signin',  to: 'sessions#new',     via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  # REST resources
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

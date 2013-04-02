@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-def new_user
-    FactoryGirl.create(:user)
-end
-
 describe "UserPages" do
     subject { page }
 
@@ -54,6 +50,7 @@ describe "UserPages" do
                 let(:user) { User.find_by(email: "beatrice@fw.com") }
 
                 it { should have_title(user.name) }
+                it { should have_link('Sign out') }
                 it { should have_selector('div.alert.alert-success', 
                                           text: 'Welcome') }
             end

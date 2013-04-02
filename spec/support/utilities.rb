@@ -6,3 +6,7 @@ def full_title(page_title)
     "#{base_title} | #{page_title}"
   end
 end
+
+def new_user
+    FactoryGirl.create(:user)
+end
