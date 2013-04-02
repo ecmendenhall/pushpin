@@ -1,8 +1,32 @@
-/* colors */
-$red: #c22;
-$grayMediumLight: #eaeaea;
+/* default colors */
+$black:         	 #000;	
+$grayDarker:         #222;	
+$grayDark:           #333;
+$gray:               #555;
+$grayMediumLight:    #eaeaea;
+$grayLight:	         #999;	
+$grayLighter:        #eee;	
+$white:	             #fff;
 
-/* bootstrap overrides */
+$blue:               #049cdb;
+$green:              #46a546;	
+$red:                #9d261d;
+$yellow:             #ffc40d;
+$orange:             #f89406;
+$pink:               #c3325f;
+$purple:             #7a43b6;
+
+$warningText:        #c09853;	
+$warningBackground:  #f3edd2;	
+$errorText:          #b94a48;
+$errorBackground:    #f2dede;	
+$successText:        #468847;
+$successBackground:  #dff0d8;	
+$infoText:           #3a87ad;
+$infoBackground:     #d9edf7;
+
+/* color overrides */
+$red: #c22;
 $linkColor: $red;
 
 @import "bootstrap";
@@ -160,7 +184,7 @@ aside {
     }
     &:hover {
       text-decoration: none;
-      color: $blue;
+      color: $red;
     }
   }
   strong {
