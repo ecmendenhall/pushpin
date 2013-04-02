@@ -13,6 +13,13 @@
     </aside>
     <div class="span8">
         <%= render 'follow_form' if signed_in? %>
+        <% if @user.links.any? %>
+            <h3>Links (<%= @user.links.count %>)</h3>
+            <ol class="comments">
+                <%= render @links %>
+            </ol>
+            <%= will_paginate @links %>
+        <% end %>
         <% if @user.comments.any? %>
             <h3>Comments (<%= @user.comments.count %>)</h3>
             <ol class="comments">

@@ -12,7 +12,17 @@ FactoryGirl.define do
 
   factory :comment do
       content "Wow, great link!"
-      link_id "user@2013-03-27T22:23:11Z"
+      sequence(:link_id)
+      user
+  end
+
+  factory :link do
+      url "http://pielab.info"
+      title "PieLab: Pies of tomorrow, today"
+      description %{PieLab is an interdisciplinary research
+                    group dedicated to the development of
+                    experimental pies.}
+      sequence(:datetime) { |n| "201#{n}-03-21T03:02:07Z".to_time }
       user
   end
 end

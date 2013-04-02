@@ -30,6 +30,8 @@ describe User do
     it { should respond_to(:following?) }
     it { should respond_to(:follow!) }
 
+    it { should respond_to(:links) }
+
     it { should be_valid }
     it { should_not be_admin }
 
@@ -155,6 +157,30 @@ describe User do
             let(:user_with_invalid_password) { found_user.authenticate("invalid") }
             it { should_not eql(user_with_invalid_password) }
             specify { expect(user_with_invalid_password).to be_false }
+        end
+    end
+
+    describe "link associations" do
+        before { @user.save }
+        let!(:older_link) do
+            FactoryGirl.create(:link, user: @user,
+                                      datetime: "2013-03-21T03:02:07Z".to_time)
+        end
+        let!(:newer_link) do
+            FactoryGirl.create(:link, user: @user,
+                                         datetime: "2013-03-22T03:02:07Z".to_time)
+        end
+        it "should have the right links in the right order" do
+            expect(@user.links.to_a).to eql([newer_link, older_link])
+        end
+
+        it "should destroy associated links" do
+            links = @user.links.dup.to_a
+            @user.destroy
+            expect(links).not_to be_empty
+            links.each do |link|
+                expect(Link.where(id: link.id)).to be_empty
+            end
         end
     end
 

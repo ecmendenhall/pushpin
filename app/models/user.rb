@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     before_save :create_remember_token
 
     has_many :comments, dependent: :destroy
+    has_many :links, dependent: :destroy
     has_many :relationships, 
         foreign_key: "follower_id", 
         dependent: :destroy
