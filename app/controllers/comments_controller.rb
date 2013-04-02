@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     end
 
     def correct_user
-        @comment = current_user.comments.find(id: params[:id])
+        @comment = current_user.comments.find(params[:id])
         redirect_to root_url if @comment.nil?
     end
 end
