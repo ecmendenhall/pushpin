@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
+#  pinboard        :string(255)
+#  api_token       :string(255)
+#
+
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
     before_save :create_remember_token
@@ -64,13 +80,11 @@ class User < ActiveRecord::Base
 
         def add_new_links(entries)
             entries.each do |entry|
-                link_id = entry.author + "@" + entry.published.to_s
                 # Check if it already exists? Enforce uniqueness w/ index?
                 self.links.create!(url: entry.url,
                                    title: entry.title,
                                    description: entry.summary,
-                                   datetime: entry.published,
-                                   link_id: link_id)
+                                   datetime: entry.published)
             end
         end
 end

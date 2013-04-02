@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id          :integer          not null, primary key
+#  url         :string(255)
+#  title       :string(255)
+#  description :text
+#  datetime    :datetime
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 require 'spec_helper'
 
 describe Link do
@@ -10,8 +24,7 @@ describe Link do
                                         group dedicated to the development of
                                         experimental pies.},
                          datetime: "2013-03-21T03:02:07Z",
-                         user_id: user.id,
-                         link_id: "beatrice@2013-03-21 03:02:07 UTC")
+                         user_id: user.id)
 
     end
 
@@ -22,7 +35,6 @@ describe Link do
     it { should respond_to(:description) }
     it { should respond_to(:datetime) }
     it { should respond_to(:user_id) }
-    it { should respond_to(:link_id) }
 
     it { should respond_to(:user) }
     its(:user) { should eql(user) }
@@ -46,20 +58,6 @@ describe Link do
 
     describe "when datetime is not present" do
         before { @link.datetime = nil }
-        it { should_not be_valid }
-    end
-
-    describe "when link id is not present" do
-        before { @link.link_id = nil }
-        it { should_not be_valid }
-    end
-
-    describe "when link id already exists" do
-        before do
-            same_link = @link.dup
-            same_link.save
-        end
-
         it { should_not be_valid }
     end
 end

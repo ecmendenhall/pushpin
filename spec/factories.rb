@@ -25,6 +25,5 @@ FactoryGirl.define do
                     group dedicated to the development of
                     experimental pies.}
       sequence(:datetime) { |n| "201#{n}-03-21T03:02:07Z".to_time }
-      sequence(:link_id) { |n| "blah@201#{n}-03-21 03:02:07 UTC"}
     end
 end

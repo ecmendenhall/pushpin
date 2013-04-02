@@ -17,6 +17,7 @@ group :development, :test do
     gem 'growl', '1.0.3'
     gem 'spork-rails', github: 'railstutorial/spork-rails', branch: 'rails-4'
     gem 'guard-spork', '1.5.0'
+    gem 'annotate', '2.5.0'
 end
 
 group :test do

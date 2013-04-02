@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20130402195346) do
   create_table "comments", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.string   "link_id"
+    t.integer  "link_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,10 +31,8 @@ ActiveRecord::Schema.define(version: 20130402195346) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "link_id"
   end
 
-  add_index "links", ["link_id"], name: "index_links_on_link_id"
   add_index "links", ["user_id", "created_at"], name: "index_links_on_user_id_and_created_at"
 
   create_table "relationships", force: true do |t|
