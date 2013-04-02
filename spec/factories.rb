@@ -4,6 +4,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "beatrice_#{n}@example.com"}   
     password "beatrice"
     password_confirmation "beatrice"
+    pinboard "beatrice" 
 
     factory :admin do
         admin true
@@ -17,12 +18,13 @@ FactoryGirl.define do
   end
 
   factory :link do
+      user
       url "http://pielab.info"
       title "PieLab: Pies of tomorrow, today"
       description %{PieLab is an interdisciplinary research
                     group dedicated to the development of
                     experimental pies.}
       sequence(:datetime) { |n| "201#{n}-03-21T03:02:07Z".to_time }
-      user
-  end
+      sequence(:link_id) { |n| "blah@201#{n}-03-21 03:02:07 UTC"}
+    end
 end

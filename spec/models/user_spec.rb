@@ -11,6 +11,9 @@ describe User do
     it { should respond_to(:name) }
     it { should respond_to(:email) }
 
+    it { should respond_to(:pinboard) }
+    it { should respond_to(:api_token) }
+
     it { should respond_to(:password_digest) }
     it { should respond_to(:password) }
     it { should respond_to(:password_confirmation) }
@@ -206,5 +209,17 @@ describe User do
                 expect(Comment.where(id: comment.id)).to be_empty
             end
         end
+    end
+
+    describe "fetching links" do
+        @user = User.new(name: "Maciej", 
+                         email: "maciej@pinboard.in",
+                         password: "pinboard",
+                         password_confirmation: "pinboard",
+                         pinboard: "maciej")
+        @user.save
+        maciej = User.find_by_email("maciej@pinboard.in")
+        links = maciej.links
+        specify { expect(links.count).to eql(70) }
     end
 end

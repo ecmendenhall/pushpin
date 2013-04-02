@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
     before_save :create_remember_token
+    after_save :get_new_links
 
     has_many :comments, dependent: :destroy
     has_many :links, dependent: :destroy
@@ -47,9 +48,29 @@ class User < ActiveRecord::Base
         relationships.find_by(followed_id: other_user.id).destroy
     end
 
+    def get_new_links
+        feed_url = "http://feeds.pinboard.in/rss/u:#{self.pinboard}/"
+        feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+        if feed 
+            add_new_links(feed.entries)
+        end
+    end
+
     private
         
         def create_remember_token
             self.remember_token = SecureRandom.urlsafe_base64
+        end
+
+        def add_new_links(entries)
+            entries.each do |entry|
+                link_id = entry.author + "@" + entry.published.to_s
+                # Check if it already exists? Enforce uniqueness w/ index?
+                self.links.create!(url: entry.url,
+                                   title: entry.title,
+                                   description: entry.summary,
+                                   datetime: entry.published,
+                                   link_id: link_id)
+            end
         end
 end

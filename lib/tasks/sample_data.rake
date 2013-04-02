@@ -17,6 +17,7 @@ namespace :db do
       name  = Faker::Name.name
       email = "example-#{n+1}@pielab.info"
       password  = "password"
+      pinboard = "pinboard#{n}"
       User.create!(name: name,
                    email: email,
                    password: password,
@@ -31,11 +32,15 @@ namespace :db do
         url = "http://www.example.com"
         description = Faker::Lorem.paragraph(1)
         datetime = DateTime.now
-        users.each { |user| user.links.create!(title: title,
-                                               url: url,
-                                               description: description,
-                                               datetime: datetime,
-                                               user_id: user.id) }
+        users.each do |user| 
+            link_id = "#{user.pinboard}@013-03-21 01:55:11 UTC"
+            user.links.create!(title: title,
+                               url: url,
+                               description: description,
+                               datetime: datetime,
+                               link_id: link_id,
+                               user_id: user.id) 
+        end
     end
   end
 

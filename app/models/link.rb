@@ -5,6 +5,7 @@ class Link < ActiveRecord::Base
     validates :title, presence: true
     validates :datetime, presence: true
     validates :user_id, presence: true
+    validates :link_id, presence: true, uniqueness: true
 
     default_scope -> { order('datetime DESC') }
 end
