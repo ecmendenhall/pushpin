@@ -16,6 +16,7 @@ describe User do
     it { should respond_to(:remember_token) }
     it { should respond_to(:authenticate) }
     it { should respond_to(:admin) }
+    it { should respond_to(:comments) }
 
     it { should be_valid }
     it { should_not be_admin }
@@ -120,6 +121,30 @@ describe User do
             let(:user_with_invalid_password) { found_user.authenticate("invalid") }
             it { should_not eql(user_with_invalid_password) }
             specify { expect(user_with_invalid_password).to be_false }
+        end
+    end
+
+    describe "comment associations" do
+        before { @user.save }
+        let!(:older_comment) do
+            FactoryGirl.create(:comment, user: @user,
+                                         created_at: 1.day.ago)
+        end
+        let!(:newer_comment) do
+            FactoryGirl.create(:comment, user: @user,
+                                         created_at: 1.hour.ago)
+        end
+        it "should have the right comments in the right order" do
+            expect(@user.comments.to_a).to eql([newer_comment, older_comment])
+        end
+
+        it "should destroy associated comments" do
+            comments = @user.comments.dup.to_a
+            @user.destroy
+            expect(comments).not_to be_empty
+            comments.each do |comment|
+                expect(Comment.where(id: comment.id)).to be_empty
+            end
         end
     end
 end

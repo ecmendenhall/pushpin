@@ -9,4 +9,10 @@ FactoryGirl.define do
         admin true
     end
   end
+
+  factory :comment do
+      content "Wow, great link!"
+      link_id "user@2013-03-27T22:23:11Z"
+      user
+  end
 end

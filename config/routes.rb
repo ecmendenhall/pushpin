@@ -12,6 +12,7 @@ Pushpin::Application.routes.draw do
   # REST resources
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :comments, only: [:create, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

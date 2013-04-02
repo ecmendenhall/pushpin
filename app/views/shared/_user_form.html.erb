@@ -1,5 +1,5 @@
 <%= form_for(@user) do |f| %>
-      <%= render 'shared/form_errors' %>
+      <%= render 'shared/form_errors', object: f.object %>
 
       <%= f.label :name %>
       <%= f.text_field :name %>

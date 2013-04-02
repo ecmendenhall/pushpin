@@ -34,4 +34,15 @@ module SessionsHelper
     def store_location
         session[:return_to] = request.url
     end
+
+    def signed_in_user
+        unless signed_in?
+            store_location
+            redirect_to signin_url, notice: "Please sign in."
+        end
+    end
+
+    def admin_user
+        redirect_to(root_path) unless current_user.admin?
+    end
 end

@@ -67,6 +67,19 @@ describe "Authentication" do
                     it { should have_title('Sign in') }
                 end
             end
+
+            describe "in the Comments controller" do
+
+                describe "submitting to the create action" do
+                    before { post comments_path }
+                    specify { expect(response).to redirect_to(signin_path) }
+                end
+
+                describe "submitting to the destroy action" do
+                    before { delete comment_path(FactoryGirl.create(:comment)) }
+                    specify { expect(response).to redirect_to(signin_path) }
+                end
+            end
         end
 
         describe "as non-admin user" do
