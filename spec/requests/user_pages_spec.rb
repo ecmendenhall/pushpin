@@ -67,8 +67,6 @@ describe "UserPages" do
         let(:user) { new_user }
         let!(:l1) { FactoryGirl.create(:link, user: user) }
         let!(:l2) { FactoryGirl.create(:link, user: user) }
-        let!(:c1) { FactoryGirl.create(:comment, user: user, content: "Foo") }
-        let!(:c2) { FactoryGirl.create(:comment, user: user, content: "Bar") }
         before { visit user_path(user) }
 
         it { should have_content(user.name) }
@@ -78,12 +76,6 @@ describe "UserPages" do
             it { should have_content(l1.title) }
             it { should have_content(l2.title) }
             it { should have_content(user.links.count) }
-        end
-
-        describe "comments" do
-            it { should have_content(c1.content) }
-            it { should have_content(c2.content) }
-            it { should have_content(user.comments.count) }
         end
 
         describe "follow/unfollow buttons" do
@@ -185,14 +177,14 @@ describe "UserPages" do
         end
 
         describe "page" do
-            it { should have_content("Update your profile") }
+            it { should have_content("Settings") }
             it { should have_title("Edit user") }
             it { should have_link("change", href: "http://gravatar.com/emails") }
         end
 
         describe "with invalid information" do
             before { click_button "Save changes" }
-            it { should have_content("error") }
+            it { should have_content("errors") }
         end
 
         describe "with valid information" do

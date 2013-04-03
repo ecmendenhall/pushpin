@@ -63,6 +63,8 @@ textarea {
   }
 }
 
+ul { list-style: none; }
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -291,6 +293,14 @@ input {
   @extend .error;
 }
 
+/* flash */
+.alert {
+    a { 
+        text-decoration: underline;
+        opacity: .8;
+    }
+}
+
 /* Users index */
 
 .users {
@@ -325,6 +335,11 @@ input {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
     margin-left: 0px;
+
+    &:last-child { 
+        margin-top: 0px;
+        padding-top: 0px;
+    }
   }
 }
 .comments-container {
@@ -381,16 +396,33 @@ aside {
 /* hero unit */
 .big-title {
     margin-bottom: 30px;
+    padding-left: 15%;
+    padding-right: 15%;
     h1 {
         color: $linkColor;
         font-size: 5em;
-        margin-bottom: 0px;
-        padding-left: 25%;
-        padding-right: 25%;
+        margin-bottom: 5px;
     }
     h4 { 
-        margin-top: 2px;
-        padding-left: 15%;
-        padding-right: 15%;
+        margin-bottom: 1em;
     }
+}
+
+/* contact box */
+.contact {
+    span { display: block; }
+    #bugs { margin-top: 1em; }
+}
+
+/* help page */
+.qa {
+    h2 { 
+        color: $linkColor;
+        font-size: 1.75em;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    padding-right: 15%;
+    margin-bottom: 2em;
 }

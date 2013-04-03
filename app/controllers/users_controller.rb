@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
           sign_in @user
-          flash[:success] = "Welcome to Pushpin!"
+          flash[:success] = render_to_string(partial: 'shared/welcome').html_safe 
           redirect_to @user
       else
           render 'new'
@@ -77,7 +77,9 @@ class UsersController < ApplicationController
         params.require(:user).permit(:name, 
                                      :email, 
                                      :password,
-                                     :password_confirmation)
+                                     :password_confirmation,
+                                     :pinboard,
+                                     :api_token)
     end
 
     def correct_user

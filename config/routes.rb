@@ -2,7 +2,7 @@ Pushpin::Application.routes.draw do
   root to: 'static_pages#home'
 
   # Static pages 
-  match '/about', to: 'static_pages#about', via: 'get'
+  match '/help', to: 'static_pages#help', via: 'get'
 
   # Authentication
   match '/signup',  to: 'users#new',        via: 'get'
@@ -18,6 +18,11 @@ Pushpin::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :comments, only: [:create, :destroy]
   resources :links, only: :show
+  resources :links do
+      member do
+          get :share, :save, :new_comment
+      end
+  end
   resources :relationships, only: [:create, :destroy]
 
 

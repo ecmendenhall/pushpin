@@ -8,6 +8,8 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'feedzirra', '0.2.0.rc2'
+gem 'httparty', '0.10.2'
+gem 'whenever', '0.8.2', :require => false
 
 group :development, :test do
     gem 'sqlite3', '1.3.7'

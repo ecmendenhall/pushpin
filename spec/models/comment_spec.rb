@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  content    :text
 #  user_id    :integer
-#  link_id    :string(255)
+#  link_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #

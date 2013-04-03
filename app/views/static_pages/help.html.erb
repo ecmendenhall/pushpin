@@ -1,2 +1,103 @@
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<% provide(:title, 'Help') %>
+<div class="span8">
+
+<div class="qa">
+<h2>What is Pinboard?</h2>
+<p><a href="https://pinboard.in/">Pinboard</a> is an excellent
+bookmarking service and personal archive for just about anything
+you find online. It offers a ton of useful features and it's designed
+to keep your data safe and open for the long term. It is absolutely worth 
+<a href="http://blog.pinboard.in/2011/12/don_t_be_a_free_user/">$10.07</a>.
+Pushpin adds shared items and comments inspired by the late, great 
+Google Reader.
+</div>
+
+<div class="qa">
+<h2>How do I share a link to Pushpin?</h2>
+<p>All the <a href="https://pinboard.in/howto/#privacy">public bookmarks</a>
+you save to Pinboard are automatically imported to Pushpin, so you can use
+any tool that posts to Pinboard. There are lots of 
+<a href="https://pinboard.in/howto/#saving">bookmarklets</a>,
+<a href="https://pinboard.in/resources/">browser extensions</a>, and 
+<a href="https://pinboard.in/resources/">third-party tools</a> available.</p>
+<p>My favorites are <a href="http://www.reederapp.com/">Reeder</a>, 
+<a href="https://code.google.com/p/pindroid/">Pindroid</a>,
+<a href="https://chrome.google.com/webstore/detail/pinboard-tools/dpaohcncbmkojcpcjaojcehdlnjfbjkl?hl=en">Pinboard for Chrome</a>, and 
+<a href="https://ifttt.com/">IFTTT</a>.</p>
+</div>
+
+<div class="qa">
+<h2>How do I add a comment to a link I share?</h2>
+<p>If you save a link to pinboard with a description,
+it's automatically added to your link as a comment.</p>
+</div>
+
+<div class="qa">
+<h2>What happens if I share a link in my feed?</h2>
+<p>Clicking "share" underneath a link in your feed
+saves it to your Pinboard account as a public bookmark.
+It should show up in your Pushpin feed and shared items
+right away.</p>
+</div>
+
+<div class="qa">
+<h2>What happens if I save a link in my feed?</h2>
+<p>Clicking "save" underneath a link in your feed saves
+it to your Pinboard account as a private bookmark.
+It will never show up in your Pushpin feed unless you
+change its privacy setting on Pinboard.</p>
+</div>
+
+<div class="qa">
+<h2>How can I change my avatar?</h2>
+<p>Pushpin uses your <a href="https://secure.gravatar.com/">Gravatar</a>—
+a universal profile image associated with your email. 
+If you don't have one, you can sign up
+<a href="https://secure.gravatar.com/site/signup/">here</a>.
+You can change your Gravatar from your Pushpin 
+<% if current_user %>
+    <%= link_to "settings", edit_user_path(current_user) %>
+    page.
+<% else %>
+settings page.
+<% end %></p>
+</div>
+
+<div class="qa">
+<h2>Where is my API token?</h2>
+<p>You can find your API token on your <a href="https://pinboard.in/settings/">
+    Pinboard settings</a> page.</p>
+</div>
+
+<div class="qa">
+<h2>Are all my shared items and comments public?</h2>
+<p>Yes, for now. Groups are one of many features I hope to
+include eventually.</p>
+</div>
+
+<div class="qa">
+<h2>Do I have to use my real name?</h2>
+<p>No, but you do have to use <em>a</em> name.</p>
+</div>
+
+<div class="qa">
+<h2>Is all my Pushpin data safe forever?</h2>
+<p>Absolutely not. This is a very early prototype and anything 
+   may break at any time.</p>
+</div>
+
+
+</div>
+<aside class="span3 pull-right well contact">
+<h4>Contact me:</h4>
+<span>
+    Email: 
+    <a href="mailto:ecmendenhall+pushpin@gmail.com">ecmendenhall@gmail.com</a>
+</span>
+<span>
+    Twitter: <a href="https://twitter.com/ecmendenhall">@ecmendenhall</a>
+</span>
+<span id="bugs">
+    Bugs: <a href="https://github.com/ecmendenhall/pushpin/issues">Github Issues</a>
+</span>
+</aside>

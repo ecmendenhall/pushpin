@@ -10,9 +10,18 @@
             <%= link.description %>
         <% end %>
     </div>
-    <span class="timestamp">
-        Shared <%= time_ago_in_words(link.datetime) %> ago.
-    </span>
+    <div class="actions">
+        <span class="timestamp">
+            Shared <%= time_ago_in_words(link.datetime) %> ago.
+        </span>
+        <span class="user-actions">
+            <% unless link.user == current_user %>
+            <%= link_to "share", share_link_path(link) %>
+            <%= link_to "save", save_link_path(link) %>
+            <% end %>
+            <%= link_to "permalink", link %>
+        </span>
+    </div>
     <span class="comments-count">
         <% unless link.comments.empty? %>
             <%= link_to "#{link.comments.count} comments", "" %>

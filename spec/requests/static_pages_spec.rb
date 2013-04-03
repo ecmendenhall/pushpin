@@ -16,8 +16,8 @@ describe "StaticPages" do
         it_should_behave_like "all static pages" 
         it { should_not have_title(full_title('Home')) }
         it "should have the right links on the layout" do
-            click_link "About"
-            expect(page).to have_title(full_title('About'))
+            click_link "Help"
+            expect(page).to have_title(full_title('Help'))
         end
 
         describe "for signed-in users" do
@@ -42,16 +42,16 @@ describe "StaticPages" do
                     visit root_path
                 end
 
-                it { should have_link("0 following", href: following_user_path(user)) }
-                it { should have_link("1 followers", href: followers_user_path(user)) }
+                it { should have_link("following 0", href: following_user_path(user)) }
+                it { should have_link("followers 1", href: followers_user_path(user)) }
             end
         end
     end
 
-    describe "About page" do
-        before { visit about_path }
-        let(:heading) { 'About Pushpin' }
-        let(:page_title) { 'About' }
+    describe "Help page" do
+        before { visit help_path }
+        let(:heading) { 'What is Pinboard' }
+        let(:page_title) { 'Help' }
 
         it_should_behave_like "all static pages"
     end

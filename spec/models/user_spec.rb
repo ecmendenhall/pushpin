@@ -210,7 +210,9 @@ describe User do
 
             before do
                 @user.follow!(followed_user)
-                3.times { followed_user.links.create!(title: "Lorem ipsum") }
+                3.times { followed_user.links.create!(title: "Lorem ipsum",
+                                                      url: "http://example.com",
+                                                      datetime: "2013-03-22T03:02:07Z".to_time) }
             end
 
             its(:feed) { should include(newer_link) }
@@ -235,7 +237,7 @@ describe User do
                                          created_at: 1.hour.ago)
         end
         it "should have the right comments in the right order" do
-            expect(@user.comments.to_a).to eql([newer_comment, older_comment])
+            expect(@user.comments.to_a).to eql([older_comment, newer_comment])
         end
 
         it "should destroy associated comments" do

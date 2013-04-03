@@ -1,5 +1,7 @@
 <%= f.label :pinboard, "Pinboard username" %>
 <%= f.text_field :pinboard %>
 
-<%= f.label :api_token, "Pinboard API token" %>
+<%= f.label :api_token, 
+    "Pinboard API token #{link_to("(From your pinboard settings page)",
+                          "https://pinboard.in/settings")}".html_safe %>
 <%= f.text_field :api_token %>

@@ -1,0 +1,56 @@
+<% provide(:title, @link.title) %>
+<aside class="span2">
+    <section>
+        <%= render 'shared/user_info_small' %>
+    </section>
+    <section>
+    <%= render 'shared/stats_small' %>
+    </section>
+</aside>
+<div class="span9">
+    <div class="link-feed">
+        <ul>
+        <li id="<%= @link.id %>" class="feed-item">
+            <div class="title">
+                <%= link_to @link.title, @link.url %>
+            </div>
+            <div class="url">
+                <%= link_to @link.url[0..80], @link.url %>
+            </div>
+            <div class="description">
+                <%= link_to gravatar_for(@link.user, size: 15), @link.user %>
+                <div class="user">
+                    <%= link_to @link.user.pinboard, @link.user %>
+                </div>
+                <% unless @link.title == @link.description %>
+                    <%= @link.description %>
+                <% end %>
+            </div>
+            <div class="actions">
+                <span class="timestamp">
+                    Shared <%= time_ago_in_words(@link.datetime) %> ago.
+                </span>
+                <span class="user-actions">
+                    <% unless @link.user == current_user %>
+                    <%= link_to "share", share_link_path(@link) %>
+                    <%= link_to "save", save_link_path(@link) %>
+                    <% end %>
+                    <%= link_to "permalink", @link %> 
+                </span>
+            </div>
+            <div class="comments-container">
+                <% unless @link.comments.empty? %>
+                    <ul class="comments">
+                    <% @link.comments.each do |comment| %>
+                        <% if comment.user %>
+                            <%= render comment %>
+                        <% end %>
+                    <% end %>
+                    </ul>
+                <% end %>
+                <%= render 'shared/comment_form' %>
+            </div>
+        </li>
+      </ul>
+   </div>
+</div>

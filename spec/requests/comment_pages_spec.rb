@@ -8,23 +8,26 @@ describe "Comment pages" do
   before { sign_in user }
 
   describe "comment creation" do
-    before { visit root_path }
+    before do
+        link = FactoryGirl.create(:link)
+        visit new_comment_link_path(link)
+    end
 
     describe "with invalid information" do
 
-      it "should not create a micropost" do
+      it "should not create a comment" do
         expect { click_button "Post" }.not_to change(Comment, :count)
       end
 
       describe "error messages" do
         before { click_button "Post" }
-        it { should have_content('error') } 
+        it { should have_content('Your comment could not be saved.') } 
       end
     end
 
     describe "with valid information" do
 
-      before { fill_in 'content', with: "Lorem ipsum" }
+      before { fill_in 'comment_content', with: "Lorem ipsum" }
       it "should create a comment" do
         expect { click_button "Post" }.to change(Comment, :count).by(1)
       end
@@ -32,7 +35,10 @@ describe "Comment pages" do
   end
 
   describe "comment destruction" do
-      before { FactoryGirl.create(:comment, user: user) }
+      before do 
+          link = FactoryGirl.create(:link, user: user)
+          comment = FactoryGirl.create(:comment, user: user, link: link)
+      end
 
       describe "as correct user" do
           before { visit root_path }
