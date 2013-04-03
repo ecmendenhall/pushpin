@@ -2,16 +2,20 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean          default(FALSE)
-#  pinboard        :string(255)
-#  api_token       :string(255)
+#  id                         :integer          not null, primary key
+#  name                       :string(255)
+#  email                      :string(255)
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  password_digest            :string(255)
+#  remember_token             :string(255)
+#  admin                      :boolean          default(FALSE)
+#  pinboard                   :string(255)
+#  api_token                  :string(255)
+#  pinboard_confirmed         :boolean
+#  pinboard_confirmation_code :string(255)
+#  email_confirmation_code    :string(255)
+#  email_confirmed            :boolean
 #
 
 require 'spec_helper'

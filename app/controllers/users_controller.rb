@@ -27,6 +27,22 @@ class UsersController < ApplicationController
       end
   end
 
+  def process_confirmation
+      user = User.find_by(email: params[:confirm][:email].downcase)
+      confirm_type = params[:type]
+      confirm_code = params[:code]
+      if confirm_type == "email"
+          confirm_and_sign_in(user, :email, confirm_code)
+      elsif confirm_type == "pinboard"
+          confirm_and_sign_in(user, :pinboard, confirm_code)
+      else
+          redirect_to root_url
+      end
+  end
+
+  def confirm
+  end
+
   def edit
       @user = User.find(params[:id])
   end
@@ -87,4 +103,33 @@ class UsersController < ApplicationController
         redirect_to(root_path) unless current_user?(@user)
     end
 
+    def confirm_and_sign_in(user, confirm_type, user_code)
+      if user && user.authenticate(params[:confirm][:password])
+          if confirm_type == :email
+              if user.email_confirmation_code == user_code
+                  user.email_confirmed = true
+                  user.save
+                  sign_in user
+                  flash[:success] = "Thanks! Your email address is confirmed."
+                  redirect_to root_url
+              else
+                  flash.now[:error] = "Wrong authentication code."
+              end
+    
+          elsif confirm_type == :pinboard
+              if user.pinboard_confirmation_code == user_code
+                  user.pinboard_confirmed = true
+                  user.save
+                  sign_in user
+                  flash[:success] = "Thanks! Your Pinboard username is confirmed."
+                  redirect_to root_url
+              else
+                  flash.now[:error] = "Wrong authentication code."
+              end
+          end
+      else
+          flash.now[:error] = 'Invalid email/password combination'
+          render 'confirm'
+      end
+  end
 end

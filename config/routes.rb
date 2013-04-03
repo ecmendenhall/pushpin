@@ -9,6 +9,12 @@ Pushpin::Application.routes.draw do
   match '/signin',  to: 'sessions#new',     via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
+  # Email/Pinboard confirmation
+  match '/confirm/:type/:code', 
+      to: 'users#confirm', via: 'get', as: 'confirm'
+  match '/confirm/:type/:code', 
+      to: 'users#process_confirmation', via: 'post', as: 'process_confirmation'
+
   # REST resources
   resources :users do
       member do

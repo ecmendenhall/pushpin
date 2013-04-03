@@ -1,0 +1,17 @@
+<% provide(:title, "Confirm your Pinboard") %>
+<h1>Confirm your Pinboard username</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+     <%= form_for(:confirm, url: process_confirmation_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+    <% end %> 
+  </div>
+</div>
