@@ -1,0 +1,37 @@
+<li id="<%= feed_item.id %>" class="feed-item">
+    <div class="title">
+        <%= link_to feed_item.title, feed_item.url %>
+    </div>
+    <div class="url">
+        <%= link_to feed_item.url[0..80], feed_item.url %>
+    </div>
+    <div class="description">
+        <%= link_to gravatar_for(feed_item.user, size: 15), feed_item.user %>
+        <div class="user">
+            <%= link_to feed_item.user.pinboard, feed_item.user %>
+        </div>
+        <% unless feed_item.title == feed_item.description %>
+            <%= feed_item.description %>
+        <% end %>
+    </div>
+    <div class="actions">
+        <span class="timestamp">
+            Shared <%= time_ago_in_words(feed_item.datetime) %> ago.
+        </span>
+        <span class="user-actions">
+            <%= link_to "share" %>
+            <%= link_to "save" %>
+        </span>
+    </div>
+    <div class="comments-container">
+        <% unless feed_item.comments.empty? %>
+            <ul class="comments">
+            <% feed_item.comments.each do |comment| %>
+                <%= render comment %>
+            <% end %>
+            </ul>
+        <% else %>
+         <%= link_to "comment" %>
+        <% end %>
+    </div>
+</li>

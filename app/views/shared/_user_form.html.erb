@@ -7,11 +7,9 @@
       <%= f.label :email %>
       <%= f.text_field :email %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= render partial: 'shared/pinboard', locals: {:f => f }  %>
 
-      <%= f.label :password_confirmation, "Confirm password" %>
-      <%= f.password_field :password_confirmation %>
+      <%= render partial: 'shared/password', locals: {:f => f } %>
 
       <%= f.submit button_text, class: "btn btn-large btn-primary" %>
 <% end %>

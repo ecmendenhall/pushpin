@@ -1,16 +1,30 @@
+<div class="row">
 <% if signed_in? %>
-    <div class="row">
-        <aside class="span4">
+            <aside class="span2">
             <section>
-                <%= render 'shared/user_info' %>
+                <%= render 'shared/user_info_small' %>
             </section>
             <section>
-                <%= render 'shared/stats' %>
-            <section>
-                <%= render 'shared/comment_form' %>
-            </section>
-        </aside>
-    </div>
+                <%= render 'shared/stats_small' %>
+            </aside>
+            <div class="span10">
+                <%= render 'shared/feed' %>
+            </div>
 <% else %>
-    Home
+    <aside class="span3 well pull-left">
+    <%= render 'shared/login' %>
+    </aside>
+    <div class="span8">
+        <div>
+            <div class="big-title">
+                <h1>Pushpin</h1>
+                <h4>Simple shared items and comments for Pinboard.</h4>
+            </div>
+            <p>Pushpin adds shared items and comments to your 
+            <strong><a href="https://pinboard.in">Pinboard</a></strong> bookmarks.
+            That's all it does. It doesn't do anything else.
+            Sign up and pretend Google Reader never died.</p>
+        </div>
+    </div>
 <% end %>
+</div>

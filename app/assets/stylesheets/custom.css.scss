@@ -27,7 +27,7 @@ $infoBackground:     #d9edf7;
 
 /* color overrides */
 $red: #c22;
-$linkColor: $red;
+$linkColor: darken($red, 5%);
 
 @import "bootstrap";
 
@@ -145,7 +145,7 @@ footer {
 
 aside {
   section {
-    padding: 10px 0;
+    padding-bottom: 10px;
     border-top: 1px solid $grayLighter;
     &:first-child {
       border: 0;
@@ -171,11 +171,34 @@ aside {
   margin-right: 10px;
 }
 
+.user-info-small {
+    margin-top: 1.5em;
+
+    .username { 
+        font-size: 1.2em; 
+    }
+
+    .name { 
+        font-size: 1em; 
+    }
+
+    .gravatar {
+        padding: 0px;
+        margin-right: 3px;
+    }
+}
+
 .stats {
   overflow: auto;
-  a {
+  strong {
+    display: block;
+  }
+}
+
+.followers { 
+    a {
     float: left;
-    padding: 0 10px;
+    padding: 5px 10px;
     border-left: 1px solid $grayLighter;
     color: gray;
     &:first-child {
@@ -184,7 +207,48 @@ aside {
     }
     &:hover {
       text-decoration: none;
-      color: $red;
+      color: $linkColor;
+    }
+  }
+}
+
+.sharing {
+    
+    border-top: 1px solid $grayLighter;
+
+    a {
+        float: left;
+        
+        color: gray;
+        
+        &:last-child {
+            padding-bottom: 10px;
+        }
+        
+        &:hover {
+            text-decoration: none;
+        color: $linkColor;
+        }
+  }
+}
+
+.stats-small {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 10px;
+      border: 0;
+    }
+    &:last-child {
+        padding-bottom: 10px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $linkColor;
     }
   }
   strong {
@@ -244,14 +308,28 @@ input {
 
 /* comments */
 
-.comments {
+.link-feed {
   list-style: none;
   margin: 10px 0 0 0;
 
   li {
-    padding: 10px 0;
+    padding-top: 10px;
+    margin-left: 30px;
     border-top: 1px solid #e8e8e8;
   }
+}
+.comments {
+  list-style: none;
+  ul { padding: 10px; }
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    margin-left: 0px;
+  }
+}
+.comments-container {
+    margin-left: 0px;
+    padding-left: 0px;
 }
 .content {
   display: block;
@@ -268,4 +346,51 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+/* link feed */
+
+.link-feed {
+
+    .feed-item {
+        margin-bottom: 1.5em; 
+    }
+
+    .title { 
+        font-size: 1.5em; 
+    }
+
+    .url {
+        a { color: $grayLight; }
+    }
+
+    .gravatar { 
+        margin-right: 3px;
+        padding-top: 3px;
+    }
+
+    .timestamp { margin-right: 5px; }
+
+    .user-actions {
+
+        a { margin-right: 5px; }
+
+    }
+}
+
+/* hero unit */
+.big-title {
+    margin-bottom: 30px;
+    h1 {
+        color: $linkColor;
+        font-size: 5em;
+        margin-bottom: 0px;
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+    h4 { 
+        margin-top: 2px;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }

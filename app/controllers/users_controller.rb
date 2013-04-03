@@ -9,8 +9,7 @@ class UsersController < ApplicationController
 
   def show
       @user = User.find(params[:id])
-      @comments = @user.comments.paginate(page: params[:page], per_page: 5)
-      @links = @user.links.paginate(page: params[:page], per_page: 5)
+      @links = @user.links.paginate(page: params[:page], per_page: 20)
   end
 
   def new
@@ -60,6 +59,16 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @users = @user.followers.paginate(page: params[:page])
       render 'show_follow'
+  end
+
+  def links
+      @user = User.find(params[:id])
+      @links = @user.links.paginate(page: params[:page], per_page: 20)
+  end
+
+  def comments
+      @user = User.find(params[:id])
+      @comments = @user.comments.paginate(page: params[:page], per_page: 20)
   end
 
   private

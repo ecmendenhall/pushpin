@@ -12,11 +12,12 @@ Pushpin::Application.routes.draw do
   # REST resources
   resources :users do
       member do
-          get :following, :followers
+          get :following, :followers, :links, :comments
       end
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :comments, only: [:create, :destroy]
+  resources :links, only: :show
   resources :relationships, only: [:create, :destroy]
 
 

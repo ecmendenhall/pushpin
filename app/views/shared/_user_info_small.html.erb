@@ -1,0 +1,7 @@
+<% @user ||= current_user %>
+<div class="user-info-small">
+    <span class="username">
+        <%= link_to gravatar_for(@user, size: 20), @user %>
+        <strong><%= link_to @user.pinboard, @user %></strong>
+    </span>
+</div>

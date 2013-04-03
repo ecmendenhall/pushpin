@@ -1,6 +1,21 @@
-<li>
-  <span class="content"><%= link.title %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(link.datetime) %> ago.
-  </span>
+<li id="<%= link.id %>" class="link">
+    <div class="title">
+        <%= link_to link.title, link.url %>
+    </div>
+    <div class="url">
+        <%= link_to link.url[0..80], link.url %>
+    </div>
+    <div class="description">
+        <% unless link.title == link.description %>
+            <%= link.description %>
+        <% end %>
+    </div>
+    <span class="timestamp">
+        Shared <%= time_ago_in_words(link.datetime) %> ago.
+    </span>
+    <span class="comments-count">
+        <% unless link.comments.empty? %>
+            <%= link_to "#{link.comments.count} comments", "" %>
+        <% end %>
+    </span>
 </li>

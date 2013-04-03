@@ -1,12 +1,12 @@
-<a href="<%= user_path(current_user) %>">
-  <%= gravatar_for current_user, size: 52 %>
-</a>
-<h1>
-  <%= current_user.name %>
-</h1>
-<span>
-  <%= link_to "view my profile", current_user %>
-</span>
-<span>
-  <%= pluralize(current_user.comments.count, "comment") %>
-</span>
+<% @user ||= current_user %>
+<div class="user-info">
+    <span class="username">
+        <%= link_to gravatar_for(@user, size: 56), @user %>
+        <h1><%= link_to @user.pinboard, @user %></h1>
+    </span>
+    <span class="name"><%= @user.name %></span>
+    <span class="pinboard">
+        <%= link_to "Pinboard profile", 
+                    "https://pinboard.in/u:#{@user.pinboard}/" %>
+   </span>
+</div>

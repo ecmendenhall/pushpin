@@ -1,5 +1,17 @@
 <li>
-  <span class="content"><%= comment.content %></span>
+<% if controller_name == "users" && action_name == "comments" %>
+    <div>
+        <span class="link"><%= link_to comment.link.title, comment.link.url %></span>
+    </div>
+  <% end %>
+  <span class="user-avatar">
+      <%= link_to gravatar_for(comment.user, size: 15), comment.user %>
+  </span>
+  <span class="content">
+  <span class="user">
+      <%= link_to "#{comment.user.pinboard}: ", comment.user %>
+  </span>
+  <%= comment.content %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(comment.created_at) %> ago.
     </span>

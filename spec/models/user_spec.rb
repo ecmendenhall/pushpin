@@ -201,6 +201,27 @@ describe User do
                 expect(Link.where(id: link.id)).to be_empty
             end
         end
+
+        describe "status" do
+            let(:unfollowed_link) do
+                FactoryGirl.create(:link, user: new_user)
+            end
+            let(:followed_user) { new_user }
+
+            before do
+                @user.follow!(followed_user)
+                3.times { followed_user.links.create!(title: "Lorem ipsum") }
+            end
+
+            its(:feed) { should include(newer_link) }
+            its(:feed) { should include(older_link) }
+            its(:feed) { should_not include(unfollowed_link) }
+            its(:feed) do
+                followed_user.links.each do |link|
+                    should include(link)
+                end
+            end
+        end
     end
 
     describe "comment associations" do

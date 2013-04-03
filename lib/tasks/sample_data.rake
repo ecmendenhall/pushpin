@@ -49,7 +49,7 @@ namespace :db do
 
   def make_comments
     users = User.all(limit: 6)
-    10.times do
+    100.times do
         content = Faker::Lorem.sentence(5)
         users.each { |user| user.comments.create!(content: content,
                                                   link_id: Link.all.sample.id) }
