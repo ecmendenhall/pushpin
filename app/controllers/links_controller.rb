@@ -1,4 +1,8 @@
 class LinksController < ApplicationController
+    before_action :active_user
+    before_action :signed_in_user
+    before_action :correct_user,   only: :destroy
+
     require 'net/http'
     
     def show

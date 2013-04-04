@@ -1,0 +1,55 @@
+<% provide(:title, "Confirm your account") %>
+<h1>Two more things...</h1>
+
+<div class="row">
+    <div class="span8 offset2">
+        <div class="confirm-status">
+            <div class="account-status" id="pinboard">
+                <% if @user.pinboard_confirmed %>
+                    <div class="alert alert-success">
+                        <span><strong>Pinboard username: </strong><%= @user.pinboard %></span>
+                        <p>Confirmed</p>
+                    </div>
+                <% else %>
+                    <div class="alert alert-error">
+                        <span><strong>Pinboard username: </strong><%= @user.pinboard %></span>
+                        <p>Unconfirmed: Check your 
+                        <%= link_to "Pinboard account",
+                            "http://pinboard.in/u:#{@user.pinboard}/" %> 
+                        for a confirmation link. 
+                        <span class="resend pull-right">
+                        <%= link_to "repost",
+                            reconfirm_pinboard_user_path(@user) %>
+                        </span></p>
+                    </div>
+                <% end %>
+            </div>
+            <div class="account-status" id="email">
+                <% if @user.email_confirmed %>
+                    <div class="alert alert-success">
+                        <span><strong>Email address: </strong><%= @user.email %></span>
+                        <p>Confirmed</p>
+                    </div>
+                <% else %>
+                    <div class="alert alert-error">
+                        <span><strong>Email address: </strong><%= @user.email %></span>
+                        <p>Unconfirmed: Check your email
+                        for a confirmation link.
+                        <span class="resend pull-right">
+                            <%= link_to "resend", 
+                                reconfirm_email_user_path(@user) %>
+                            </span></p>
+                    </div>
+                                        
+                <% end %>
+            </div>
+        <div class="qa">
+            <h2>Why?</h2>
+            <p>
+            Verifying your email helps prevent spammers from creating
+            fake accounts. Confirming your Pinboard username
+            keeps other users from stealing your Pinboard identity. 
+            </p>
+        </div>
+   </div>
+</div>

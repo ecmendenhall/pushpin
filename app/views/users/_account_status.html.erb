@@ -1,0 +1,10 @@
+<span><%= @user.pinboard %></span>
+<% if @user.pinboard_confirmed %>
+    <span class="alert alert-success">
+        Confirmed
+    </span>
+<% else %>
+    <span class="alert alert-error">
+        Unconfirmed
+    </span>
+<% end %>

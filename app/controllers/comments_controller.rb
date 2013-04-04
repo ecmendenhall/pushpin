@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :active_user
   before_action :signed_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 

@@ -55,8 +55,6 @@ class User < ActiveRecord::Base
     validates :password, length: { minimum: 8 }
     validates :password_confirmation, presence: true
 
-    attr_readonly :pinboard_confirmation_code
-
     def feed
         Link.from_users_followed_by(self)
     end
@@ -89,7 +87,6 @@ class User < ActiveRecord::Base
                 type: "pinboard", 
                 code: self.pinboard_confirmation_code,
                 host: host)
-            puts confirm_link
             params = { auth_token: self.api_token,
                        url: confirm_link,
                        description: "Pushpin: confirm your account",
@@ -108,14 +105,30 @@ class User < ActiveRecord::Base
             HTTParty.get url
     end
 
+    def remove_pinboard_confirm_link
+            if Rails.env.development?
+                host = "localhost:3000"
+            end
+            confirm_link = Rails.application.routes.url_helpers.confirm_url( 
+                type: "pinboard", 
+                code: self.pinboard_confirmation_code,
+                host: host)
+            params = { auth_token: self.api_token,
+                       url: confirm_link }.to_query
+
+            url = "https://api.pinboard.in/v1/posts/delete?#{params}"
+
+            HTTParty.get url
+    end
+
+    def new_confirm_code
+        SecureRandom.urlsafe_base64(6)
+    end
+
     private
         
         def create_remember_token
             self.remember_token = SecureRandom.urlsafe_base64
-        end
-
-        def new_confirm_code
-            SecureRandom.urlsafe_base64(6)
         end
 
         def create_confirmation_codes

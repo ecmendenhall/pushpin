@@ -25,4 +25,9 @@ Pushpin::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
 
+  # Send real emails in development environment
+  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :sendmail
+
 end

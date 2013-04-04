@@ -45,4 +45,23 @@ module SessionsHelper
     def admin_user
         redirect_to(root_path) unless current_user.admin?
     end
+
+    def active_user
+        if current_user.nil?
+            false
+        elsif current_user
+            unless current_user.email_confirmed? && current_user.pinboard_confirmed?
+                redirect_to confirm_status_user_path(current_user)
+            end
+        end
+    end
+
+    def active_user?
+        if current_user.nil?
+            false
+        elsif current_user
+            current_user.email_confirmed? && current_user.pinboard_confirmed?
+        end
+    end
+        
 end

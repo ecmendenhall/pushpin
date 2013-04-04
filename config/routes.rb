@@ -18,7 +18,8 @@ Pushpin::Application.routes.draw do
   # REST resources
   resources :users do
       member do
-          get :following, :followers, :links, :comments
+          get :following, :followers, :links, :comments, 
+              :confirm_status, :reconfirm_email, :reconfirm_pinboard
       end
   end
   resources :sessions, only: [:new, :create, :destroy]
