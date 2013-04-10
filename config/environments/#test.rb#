@@ -32,6 +32,7 @@ Pushpin::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: "localhost" }
+  config.action_dispatch.default_url_options = { host: "localhost" }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
@@ -41,4 +42,33 @@ Pushpin::Application.configure do
   silence_warnings do
       BCrypt::Engine::DEFAULT_COST = BCrypt::Engine::MIN_COST
   end
+
+  Dates:
+    -What are your preferences? I'm ready to start as soon as I can find
+an apartment.
+-Is there any timing strategy to think about? Do leasesend on a
+particular day of the month in IL/Chicago?
+-I'm planning to attend a close friend's wedding on Friday, July 5.
+This is the only immobile event on my calendar in the next six months,
+and I should only need to miss that Friday (since it's between 4th of
+  July and a weekend). I don't know how time off works for apprentices,
+but I want to get this cleared right away because it's really important.
+
+  Relocation:
+  -I know you mentioned you're a suburbanite now, but is there anywhere
+you'd live if you were on an apprentice's budget? I'll probablylook
+for a 2-3 monthsublet to start.
+    -It looked likethe Purple, Red, and Blue linescame closest tothe
+  office. Is thisright?
+  -What risks regarding moving long distance am I probably
+  underestimating now? Anything you wished you had thought about
+  before you relocated?
+
+  Other:
+    -A family friend wants to hire me for some basic web design stuff. Is
+                                        there an 8th Light policy on freelance work? I don't plan on making
+this a habit (and I have no illusions that I'll have the time!), but
+this was already in the works. If it's not okay to get paid, I'm
+probably willing to do it for free. If it's not okay at all, I'd
+                            definitely like to know.
 end

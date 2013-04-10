@@ -5,9 +5,7 @@ FactoryGirl.define do
     password "beatrice"
     password_confirmation "beatrice"
     pinboard "beatrice"
-    api_token "beatrice:12031829412"
-    pinboard_confirmed true
-    email_confirmed true
+    
 
     factory :admin do
         admin true

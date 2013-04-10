@@ -67,7 +67,19 @@ describe "UserPages" do
         let(:user) { new_user }
         let!(:l1) { FactoryGirl.create(:link, user: user) }
         let!(:l2) { FactoryGirl.create(:link, user: user) }
-        before { visit user_path(user) }
+
+        before do
+            visit confirm_path(:email, user.email_confirmation_code)
+            fill_in "Email", with: user.email
+            fill_in "Password", with: user.password
+            click_button "Sign in"
+
+            visit confirm_path(:pinboard, user.pinboard_confirmation_code)
+            fill_in "Email", with: user.email
+            fill_in "Password", with: user.password
+            click_button "Sign in"
+            visit user_path(user)
+        end
 
         it { should have_content(user.name) }
         it { should have_title(user.name) }
@@ -149,6 +161,8 @@ describe "UserPages" do
             before do
                 fill_in "Name",             with: "Beatrice Fastwater"
                 fill_in "Email",            with: "beatrice@fw.com"
+                fill_in "Pinboard username", with: "beatrice"
+                fill_in "Pinboard API token", with: "beatrice:1234567890"
                 fill_in "Password",         with: "beatrice"
                 fill_in "Confirm password", with: "beatrice"
             end
@@ -158,13 +172,29 @@ describe "UserPages" do
             end
 
             describe "after saving the user" do
-                before { click_button submit }
-                let(:user) { User.find_by(email: "beatrice@fw.com") }
+                before do
+                    click_button submit
+                end
+                
+                #it { should have_selector('div.alert.alert-success', 
+                #                          text: 'Welcome') }
 
-                it { should have_title(user.name) }
+                before do
+                    user = User.find_by(email: "beatrice@fw.com")
+
+                    visit confirm_path(:email, user.email_confirmation_code)
+                    fill_in "Email", with: user.email
+                    fill_in "Password", with: user.password
+                    click_button "Sign in"
+        
+                    visit confirm_path(:pinboard, user.pinboard_confirmation_code)
+                    fill_in "Email", with: user.email
+                    fill_in "Password", with: user.password
+                    click_button "Sign in"
+                    visit user_path(user)
+                end
+                it { should have_title('Confirm') }
                 it { should have_link('Sign out') }
-                it { should have_selector('div.alert.alert-success', 
-                                          text: 'Welcome') }
             end
         end
     end
@@ -196,11 +226,15 @@ describe "UserPages" do
                 fill_in "Password",         with: user.password
                 fill_in "Confirm password", with: user.password
                 click_button "Save changes"
+        
+                visit confirm_path(:email, user.email_confirmation_code)
+                fill_in "Email", with: new_email
+                fill_in "Password", with: user.password
+                click_button "Sign in"
             end
 
-            it { should have_title(new_name) }
-            it { should have_selector('div.alert.alert-success') }
-            it { should have_link('Sign out', href: signout_path) }
+            it { should have_title('Pushpin') }
+            # it { should have_link('Sign out', href: signout_path) }
             specify { expect(user.reload.name).to  eql(new_name) }
             specify { expect(user.reload.email).to eql(new_email) }
         end

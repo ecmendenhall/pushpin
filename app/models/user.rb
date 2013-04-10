@@ -20,7 +20,6 @@
 
 class User < ActiveRecord::Base
     before_create :create_confirmation_codes
-    after_create :post_pinboard_confirm_link
     before_save { self.email = email.downcase }
     before_save :create_remember_token
     after_save :get_new_links
@@ -54,6 +53,9 @@ class User < ActiveRecord::Base
     has_secure_password
     validates :password, length: { minimum: 8 }
     validates :password_confirmation, presence: true
+  
+    validates :pinboard, presence: true
+    validates :api_token, presence: true
 
     def feed
         Link.from_users_followed_by(self)
@@ -74,51 +76,9 @@ class User < ActiveRecord::Base
     def get_new_links
         feed_url = "http://feeds.pinboard.in/rss/u:#{self.pinboard}/"
         feed = Feedzirra::Feed.fetch_and_parse(feed_url)
-        if feed 
+        if feed
             add_new_links(feed.entries)
         end
-    end
-
-    def post_pinboard_confirm_link
-            if Rails.env.development?
-                host = "localhost:3000"
-            end
-            confirm_link = Rails.application.routes.url_helpers.confirm_url( 
-                type: "pinboard", 
-                code: self.pinboard_confirmation_code,
-                host: host)
-            params = { auth_token: self.api_token,
-                       url: confirm_link,
-                       description: "Pushpin: confirm your account",
-
-                       extended: "This is an automatically generated link used \
-                       to verify your Pinboard account. It helps \
-                       keep out spammers and prevents other users \
-                       from impersonating you. It will disappear \
-                       from your bookmarks as soon as you click through \
-                       and log in to Pushpin.",
-
-                       shared: "no" }.to_query
-
-            url = "https://api.pinboard.in/v1/posts/add?#{params}"
-
-            HTTParty.get url
-    end
-
-    def remove_pinboard_confirm_link
-            if Rails.env.development?
-                host = "localhost:3000"
-            end
-            confirm_link = Rails.application.routes.url_helpers.confirm_url( 
-                type: "pinboard", 
-                code: self.pinboard_confirmation_code,
-                host: host)
-            params = { auth_token: self.api_token,
-                       url: confirm_link }.to_query
-
-            url = "https://api.pinboard.in/v1/posts/delete?#{params}"
-
-            HTTParty.get url
     end
 
     def new_confirm_code

@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :active_user, except: [:confirm_status,  :confirm, :process_confirmation,
                                        :reconfirm_email, :reconfirm_pinboard, :edit, :update]
   before_action :signed_in_user, only: [:edit, :update, :index, :show, 
                                         :links, :comments, :following, :followers]
-  before_action :correct_user,   only: [:edit, :update, :confirm_status,
-                                        :reconfirm_email, :reconfirm_pinboard]
+  before_action :correct_user,   only: [:edit, :update] 
   before_action :admin_user,     only: :destroy
 
   def index
@@ -23,10 +23,11 @@ class UsersController < ApplicationController
   def create
       @user = User.new(user_params)
       if @user.save
+          post_pinboard_confirm_link @user
           UserMailer.confirm_email(@user).deliver
           sign_in @user
           flash[:success] = render_to_string(partial: 'shared/welcome').html_safe 
-          redirect_to @user
+          redirect_to confirm_status_user_path(@user)
       else
           render 'new'
       end
@@ -59,8 +60,10 @@ class UsersController < ApplicationController
   def update
       @user.attributes=(user_params)
       if @user.email_changed?
+        @user.save
         redirect_to reconfirm_email_user_path(@user)
       elsif @user.pinboard_changed?
+        @user.save
         redirect_to reconfirm_pinboard_user_path(@user)
       else
         if @user.save
@@ -122,7 +125,7 @@ class UsersController < ApplicationController
       @user.pinboard_confirmed = false
       new_code = @user.new_confirm_code
       if @user.update_attribute(:pinboard_confirmation_code, new_code)
-        @user.post_pinboard_confirm_link
+        post_pinboard_confirm_link @user
         flash[:success] = "Saved a new confirmation link to your Pinboard bookmarks."
         redirect_to confirm_status_user_path(@user)
       else
@@ -161,14 +164,15 @@ class UsersController < ApplicationController
                       redirect_to confirm_status_user_path(user)
                   end
               else
-                  flash.now[:error] = "Wrong authentication code."
+                flash.now[:error] = "Wrong authentication code."
+                redirect_to root_url
               end
     
           elsif confirm_type == :pinboard
               if user.pinboard_confirmation_code == user_code
                   if user.update_attribute(:pinboard_confirmed, true)
                     sign_in user
-                    user.remove_pinboard_confirm_link
+                    remove_pinboard_confirm_link user
                     flash[:success] = "Thanks! Your Pinboard username is confirmed."
                     redirect_to root_url
                   else
@@ -176,7 +180,8 @@ class UsersController < ApplicationController
                     redirect_to confirm_status_user_path(user)
                   end
               else
-                  flash.now[:error] = "Wrong authentication code."
+                flash.now[:error] = "Wrong authentication code."
+                redirect_to root_url
               end
           end
       else

@@ -24,6 +24,8 @@ describe User do
     
     before { @user = User.new(name: "Beatrice Fastwater", 
                               email: "beatrice@fw.info",
+                              pinboard: "beatrice",
+                              api_token: "beatrice:1234567890",
                               password: "beatrice",
                               password_confirmation: "beatrice") }
     subject { @user }
@@ -257,6 +259,8 @@ describe User do
     describe "fetching links" do
         @user = User.new(name: "Maciej", 
                          email: "maciej@pinboard.in",
+                         pinboard: "maciej",
+                         api_token: "maciej:120318927",
                          password: "pinboard",
                          password_confirmation: "pinboard",
                          pinboard: "maciej")
