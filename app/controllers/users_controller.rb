@@ -4,7 +4,7 @@ class UsersController < ApplicationController
                                        :reconfirm_email, :reconfirm_pinboard, :edit, :update]
   before_action :signed_in_user, only: [:edit, :update, :index, :show, 
                                         :links, :comments, :following, :followers]
-  before_action :correct_user,   only: [:edit, :update] 
+  before_action :correct_user,   only: [:edit, :update, :confirm_status] 
   before_action :admin_user,     only: :destroy
 
   def index

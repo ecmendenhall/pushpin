@@ -22,7 +22,7 @@ FactoryGirl.define do
 
   factory :link do
       user
-      url "http://pielab.info"
+      sequence(:url) { |n| "http://pielab.info/#{n}" }
       title "PieLab: Pies of tomorrow, today"
       description %{PieLab is an interdisciplinary research
                     group dedicated to the development of

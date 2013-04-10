@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130403214737) do
+ActiveRecord::Schema.define(version: 20130410043518) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20130403214737) do
     t.datetime "updated_at"
   end
 
+  add_index "links", ["url"], name: "index_links_on_url"
   add_index "links", ["user_id", "created_at"], name: "index_links_on_user_id_and_created_at"
 
   create_table "relationships", force: true do |t|

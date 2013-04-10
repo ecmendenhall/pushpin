@@ -217,7 +217,7 @@ describe User do
             before do
                 @user.follow!(followed_user)
                 3.times { followed_user.links.create!(title: "Lorem ipsum",
-                                                      url: "http://example.com",
+                                                      url: "http://example.com/#{rand(1000)}",
                                                       datetime: "2013-03-22T03:02:07Z".to_time) }
             end
 
@@ -265,6 +265,7 @@ describe User do
                          password_confirmation: "pinboard",
                          pinboard: "maciej")
         @user.save
+        @user.get_new_links
         maciej = User.find_by_email("maciej@pinboard.in")
         links = maciej.links
         specify { expect(links.count).to eql(70) }

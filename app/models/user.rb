@@ -98,11 +98,13 @@ class User < ActiveRecord::Base
 
         def add_new_links(entries)
             entries.each do |entry|
-                # Check if it already exists? Enforce uniqueness w/ index?
-                self.links.create!(url: entry.url,
-                                   title: entry.title,
-                                   description: entry.summary,
-                                   datetime: entry.published)
+                existing_link = self.links.find_by_url entry.url
+                if existing_link.nil?
+                     self.links.create!(url: entry.url,
+                                        title: entry.title,
+                                        description: entry.summary,
+                                        datetime: entry.published)
+                end
             end
         end
 end

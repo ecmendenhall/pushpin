@@ -17,6 +17,7 @@ class Link < ActiveRecord::Base
     has_many :comments
 
     validates :url, presence: true
+    validates_uniqueness_of :url, scope: :user_id
     validates :title, presence: true
     validates :datetime, presence: true
     validates :user_id, presence: true

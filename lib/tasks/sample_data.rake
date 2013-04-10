@@ -12,7 +12,8 @@ namespace :db do
                        email: "e@cmendenhall.com",
                        password: "ecmendenhall",
                        password_confirmation: "ecmendenhall",
-                       pinboard: "ecmendenhall")
+                       pinboard: "ecmendenhall",
+                       api_token: "ecmendenhall:AEA878025B9D23082882")
     ecm.toggle!(:admin)
 
     users = ["maciej", "akohli", "wrdnrd", "twnbook", "mstmorris", "masukomi", "aardvark"]
@@ -26,7 +27,8 @@ namespace :db do
                    email: email,
                    password: password,
                    password_confirmation: password,
-                   pinboard: pinboard)
+                   pinboard: pinboard,
+                   api_token: "#{user}:1A2B3C4567890i")
     end
   end
 

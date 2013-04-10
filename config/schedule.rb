@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 5.minutes do
-    rake "rss:refresh_feeds"
+    rake "rss:refresh_feeds", environment: "development"
 end
