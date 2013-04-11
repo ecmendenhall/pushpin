@@ -20,6 +20,7 @@ group :development, :test do
     gem 'spork-rails', github: 'railstutorial/spork-rails', branch: 'rails-4'
     gem 'guard-spork', '1.5.0'
     gem 'annotate', '2.5.0'
+    gem 'whenever', '0.8.2'
 end
 
 group :test do
@@ -29,7 +30,8 @@ group :test do
 end
 
 group :production do
-    gem 'pg', '0.14.1'
+    gem 'mysql2', '0.3.11'
+    gem 'amazon-ses-mailer', '0.0.4'
 end
 
 # Gems used only for assets and not required

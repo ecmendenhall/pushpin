@@ -120,8 +120,8 @@ GEM
     minitest (4.7.0)
     multi_json (1.7.2)
     multi_xml (0.5.3)
+    mysql2 (0.3.11)
     nokogiri (1.5.9)
-    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.12)
       coderay (~> 1.0.5)
@@ -225,7 +225,7 @@ DEPENDENCIES
   httparty (= 0.10.2)
   jbuilder (= 1.0.1)
   jquery-rails
-  pg (= 0.14.1)
+  mysql2 (= 0.3.11)
   rails (= 4.0.0.beta1)
   rb-fsevent (= 0.9.3)
   rspec-rails (= 2.13.0)

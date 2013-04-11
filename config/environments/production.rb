@@ -78,17 +78,12 @@ Pushpin::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  ActionMailer::Base.smtp_settings = {
-    :port =>           '587',
-    :address =>        'smtp.mandrillapp.com',
-    :user_name =>      ENV['MANDRILL_USERNAME'],
-    :password =>       ENV['MANDRILL_APIKEY'],
-    :domain =>         'heroku.com',
-    :authentication => :plain
-  }
-  ActionMailer::Base.delivery_method = :smtp
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
-  config.action_dispatch.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
+
+  mailer = AmazonSes::Mailer.new(:access_key => "AKIAI2I3FJCPCZTYLCYA",
+                                 :secret_key => "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")
+  config.action_mailer.delivery_method = mailer
+  
+  config.action_mailer.default_url_options = { host: "pushpin-env-ihcqrfwtyv.elasticbeanstalk.com" }
+  config.action_dispatch.default_url_options = { host: "pushpin-env-ihcqrfwtyv.elasticbeanstalk.com" }
 
 end
