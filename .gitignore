@@ -14,3 +14,9 @@
 /log/*.log
 /tmp
 .env
+.DS_Store
+
+# Ignore vim and emacs swapfiles
+*~
+.#*
+.*.sw?
