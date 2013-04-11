@@ -20,3 +20,6 @@
 *~
 .#*
 .*.sw?
+
+/.elasticbeanstalk
+/config/environments/production.rb
