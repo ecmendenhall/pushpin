@@ -87,4 +87,8 @@ Pushpin::Application.configure do
     :authentication => :plain
   }
   ActionMailer::Base.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
+  config.action_dispatch.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
+
 end
