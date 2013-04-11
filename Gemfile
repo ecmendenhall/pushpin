@@ -17,8 +17,6 @@ group :development, :test do
     gem 'guard-rspec', '2.5.0'
     gem 'rb-fsevent', '0.9.3', :require => false
     gem 'growl', '1.0.3'
-    gem 'spork-rails', github: 'railstutorial/spork-rails', branch: 'rails-4'
-    gem 'guard-spork', '1.5.0'
     gem 'annotate', '2.5.0'
     gem 'whenever', '0.8.2'
 end
