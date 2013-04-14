@@ -6,10 +6,10 @@ describe "Comment pages" do
 
   let(:user) { new_user }
   before { sign_in user }
+  let(:link) { FactoryGirl.create(:link) }
 
   describe "comment creation" do
     before do
-        link = FactoryGirl.create(:link)
         visit new_comment_link_path(link)
     end
 
@@ -31,6 +31,20 @@ describe "Comment pages" do
       it "should create a comment" do
         expect { click_button "Post" }.to change(Comment, :count).by(1)
       end
+    end
+
+    describe "with markdown" do
+      before do
+        fill_in 'comment_content', with: "*emphasis* [link](http://example.com)\
+                                          __strong__ ~~strikethrough~~"
+        click_button "Post"
+        visit link_path(link)
+      end
+
+        it { should have_selector('em', text: "emphasis") }
+        it { should have_selector('a', text: "link") }
+        it { should have_selector('strong', text: "strong") }
+        it { should have_selector('del', text: "strikethrough") }
     end
   end
 

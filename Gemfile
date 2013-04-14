@@ -10,6 +10,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'feedzirra', '0.2.0.rc2'
 gem 'httparty', '0.10.2'
+gem 'redcarpet', '2.2.2'
 
 group :development, :test do
     gem 'sqlite3', '1.3.7'
@@ -19,6 +20,8 @@ group :development, :test do
     gem 'growl', '1.0.3'
     gem 'annotate', '2.5.0'
     gem 'whenever', '0.8.2'
+    gem 'spork-rails', github: 'railstutorial/spork-rails', branch: 'rails-4'
+    gem 'guard-spork', '1.5.0'
 end
 
 group :test do
