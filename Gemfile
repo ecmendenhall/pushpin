@@ -12,6 +12,7 @@ gem 'feedzirra', '0.2.0.rc2'
 gem 'httparty', '0.10.2'
 gem 'redcarpet', '2.2.2'
 gem 'delayed_job_active_record', '4.0.0.beta2'
+gem 'heroku-api', '0.3.9'
 gem 'hirefire', '0.1.4'
 
 group :development, :test do
