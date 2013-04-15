@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130410043518) do
+ActiveRecord::Schema.define(version: 20130415002318) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20130410043518) do
   end
 
   add_index "comments", ["user_id", "created_at", "link_id"], name: "index_comments_on_user_id_and_created_at_and_link_id"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0
+    t.integer  "attempts",   default: 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "links", force: true do |t|
     t.string   "url"

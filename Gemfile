@@ -11,6 +11,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'feedzirra', '0.2.0.rc2'
 gem 'httparty', '0.10.2'
 gem 'redcarpet', '2.2.2'
+gem 'delayed_job_active_record', '4.0.0.beta2'
+gem 'hirefire', '0.1.4'
 
 group :development, :test do
     gem 'sqlite3', '1.3.7'
@@ -31,7 +33,7 @@ group :test do
 end
 
 group :production do
-    gem 'pg', '0.15.1'
+    gem 'pg', '0.14.1'
 end
 
 # Gems used only for assets and not required

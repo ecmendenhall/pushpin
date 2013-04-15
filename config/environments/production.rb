@@ -79,11 +79,17 @@ Pushpin::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 
-  mailer = AmazonSes::Mailer.new(:access_key => "AKIAI2I3FJCPCZTYLCYA",
-                                 :secret_key => "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")
-  config.action_mailer.delivery_method = mailer
+  ActionMailer::Base.smtp_settings = {
+    :port =>           '587',
+    :address =>        'smtp.mandrillapp.com',
+    :user_name =>      ENV['MANDRILL_USERNAME'],
+    :password =>       ENV['MANDRILL_APIKEY'],
+    :domain =>         'heroku.com',
+    :authentication => :plain
+  }
+  ActionMailer::Base.delivery_method = :smtpa
   
-  config.action_mailer.default_url_options = { host: "pushpin-env-ihcqrfwtyv.elasticbeanstalk.com" }
-  config.action_dispatch.default_url_options = { host: "pushpin-env-ihcqrfwtyv.elasticbeanstalk.com" }
+  config.action_mailer.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
+  config.action_dispatch.default_url_options = { host: "pushpin-prototype.herokuapp.com" }
 
 end
